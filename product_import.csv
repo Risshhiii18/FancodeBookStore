@@ -1,0 +1,9 @@
+sku,attribute_set_code,product_type,categories,product_websites,name,short_description,weight,product_online,visibility,price,author,qty,is_in_stock
+BOOK001,Book,simple,Default Category/Books,base,The Great Gatsby,The Great Gatsby is a novel by F. Scott Fitzgerald.,1,1,"Catalog, Search",200,F. Scott Fitzgeral,1000,1
+BOOK002,Book,simple,Default Category/Books,base,Pride and Prejudice,Pride and Prejudice is a romantic novel by Jane Austen.,1,1,"Catalog, Search",300,Jane Austen,1000,1
+BOOK003,Book,simple,Default Category/Books,base,To Kill a Mockingbird,To Kill a Mockingbird is a classic novel by Harper Lee.,1,1,"Catalog, Search",200,Harper Lee,1000,1
+BOOK004,Book,simple,Default Category/Books,base,1984,1984 is a dystopian novel by George Orwell.,1,1,"Catalog, Search",199,George Orwell,1000,0
+BOOK005,Book,simple,Default Category/Books,base,Brave New World,Brave New World is a science fiction novel by Aldous Huxley.,1,1,"Catalog, Search",400,Aldous Huxley,1000,0
+BOOK006,Book,simple,Default Category/Books,base,Harry Potter and the Sorcerer's Stone,The first book in the Harry Potter series by J.K. Rowling.,1,1,"Catalog, Search",699,J.K. Rowling,1000,0
+BOOK007,Book,simple,Default Category/Books,base,The Lord of the Rings,The Lord of the Rings is a fantasy epic by J.R.R. Tolkien.,1,1,"Catalog, Search",899,J.R.R. Tolkien,1000,0
+BOOK008,Book,simple,Default Category/Books,base,The Hitchhiker's Guide to the Galaxy,A humorous science fiction novel by Douglas Adams.,1,1,"Catalog, Search",1020,Douglas Adam,1000,1
