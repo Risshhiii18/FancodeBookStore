@@ -1,6 +1,6 @@
-Module Explaination
-	-> Created registration.php and module.xml file which is necessory for the magento module registration
-	-> Created "Setup/InstallData.php" for creating new Attrbute and attribute set and attribute group set
+Module Explanation
+	-> Created registration.php and module.xml file which is necessary for the Magento module registration
+	-> Created "Setup/InstallData.php" for creating new Attribute and attribute set
 	 // Code Snippet for Creating new Attribute Set
 		$categorySetup = $this->categorySetupFactory->create(['setup' => $setup]);
         $attributeSet = $this->attributeSetFactory->create();
@@ -17,7 +17,7 @@ Module Explaination
         $attributeSet->initFromSkeleton($attributeSetId);
         $attributeSet->save();
 
-      // Created Attribute Programattically     
+      // Created Attribute Programmatically     
       	$eavSetup->addAttribute(
             \Magento\Catalog\Model\Product::ENTITY,
             'author',
@@ -31,7 +31,7 @@ Module Explaination
                 'source' => '',
                 'global' => \Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface::SCOPE_GLOBAL, // Attribute Scope will be global so the attribute will be used in Website, Store, Store Front
                 'visible' => true, 
-                'required' => true, // Required will be true because book author is required
+                'required' => true, // Required will be true because the book author is required
                 'user_defined' => false, 
                 'default' => '',
                 'searchable' => true, // as provided in the requirement the books should be searchable by the author name so this value is true.
@@ -53,11 +53,11 @@ Module Explaination
             	5
         	);
        -> Extended "view/frontend/layout/catalog_category_view.xml" File
-       		// replaced the list.phtml file of "category.products.list" with our file which has "author" attribute and "stock available" option display
+       		// replaced the list.phtml file of "category.products.list" with our file which has the "author" attribute and "stock available" option display
        		    <block class="Magento\Catalog\Block\Product\ListProduct" name="category.products.list" as="product_list" template="Fancode_BookStore::list.phtml">
        -> Created "view/frontend/templates/list.phtml" File
-       		// author is product attribute so i can call the attribute via product collection which is by defaulr provided by the magento so i have called the attribute by using getAuthor() method
-       		// the below following code will display the stock avialablity and also the author data. from PHTML file
+       		// author is a product attribute so I can call the attribute via product collection which is by default provided by Magento so I have called the attribute by using getAuthor() method
+       		// the below-following code will display the stock availability and also the author data. from PHTML file
 	       		<?php if($_product->getAuthor() !== '' ): ?>
 	                <?=/* @noEscape */ $_helper->productAttribute($_product, $_product->getAuthor(), 'author')?>
 	            <?php endif;?>
@@ -72,12 +72,12 @@ Module Explaination
 	            <?php endif; ?> 
 
 
-Note* magento provide the graphql apis for handing the listing, search, adding/removing cart, and placing order
+Note* Magento provide the graphql APIs for handling the listing, search, adding/removing cart, and placing order
 
-below im Simulating the Process of place Order from the graphql apis 
+below I'm Simulating the Process of placing an Order from the graphql APIs 
 1) listing page
-	//below api will be used for handling the listing page by using filters in the query we can fetch the product data 
-	// here im passing category id 4 which is my books category
+	//below API will be used for handling the listing page by using filters in the query we can fetch the product data 
+	//Here I'm passing category id 4 which is my book's category
 	{
 	  products(filter: {category_id: {eq: "4"}}) {
 	    aggregations {
@@ -109,8 +109,8 @@ below im Simulating the Process of place Order from the graphql apis
 	}
 
 2) Search API
-	// search query will take a parametere as "search" and "pageSize" for teh result
-	// here im searching for search value = J.K. and pagesize = 2
+	// search query will take a parameter as "search" and "pageSize" for the result
+	// here I'm searching for search value = J.K. and pagesize = 2
 	{
 	  products(search: "J.K.", pageSize: 2) {
 	    total_count
@@ -133,12 +133,12 @@ below im Simulating the Process of place Order from the graphql apis
 	  }
 	}
 
-3) before we add or remove product from the cart we need an empty cart for the guest by following mutation it will be created
+3) before we add or remove the product from the cart we need an empty cart for the guest by the following mutation it will be created
 	mutation {
 	  createEmptyCart
 	}
 
-4) passing the cart id in the following mutation we can add the product to the cart also we have to pass the qty and sku for adding the product to cart
+4) passing the cart id in the following mutation we can add the product to the cart also we have to pass the qty and sku for adding the product to the cart
 	mutation {
 	  addSimpleProductsToCart(
 	    input: {
@@ -166,7 +166,7 @@ below im Simulating the Process of place Order from the graphql apis
 	  }
 	}
 
-5) Passoing the cart id and item id we can remove the item from the cart
+5) Passing the cart id and item id we can remove the item from the cart
 	mutation {
 	  removeItemFromCart(
 	    input: {
@@ -193,7 +193,7 @@ below im Simulating the Process of place Order from the graphql apis
 	 }
 	}
 
-6) set Shipping method on cart
+6) set the Shipping method on the cart
 mutation {
   setShippingAddressesOnCart(
     input: {
@@ -235,7 +235,7 @@ mutation {
   }
 }
 
-7) Set Billing address on cart
+7) Set the Billing address on the cart
 	mutation {
 	  setBillingAddressOnCart(
 	    input: {
@@ -330,7 +330,7 @@ mutation {
 	  }
 	}
 
-11) Set Payment Method on cart
+11) Set Payment Method on the cart
 	mutation {
 	  setPaymentMethodOnCart(input: {
 	      cart_id: "RUNQh1VN8mAbWTJbI7MwDrLWEJSXQUwh"
@@ -356,10 +356,10 @@ mutation {
 	  }
 	}
 
-Above i have provided the details regarding the API and Code which i have done to solve the problem provided in the assignment as per my understanding.
+Above I have provided the details regarding the API and Code which I have done to solve the problem provided in the assignment as per my understanding.
 
-Q) Explain process followed for database interactions through PDO or any other preferred method for security and to avoid SQL injection vulnerabilities.
--> Magento Uses ORM System to interact with the database. ORM system in magento contains 3 major file they are Model, ResourceMode and collection. ORM System provides the secure way to work with database to prevent any SQL injection. using Model and ResourceModel we can interact with the magento database without writing direct SQL query. magento denies using SQL query unless it is absolutly necessory, ORM uses query builder like addFiledToFilter, addFiledToSelect to avoid writing raw queries we can avoid SQL injection
-	.) Model -> Model is besically setters and getters, it represents single data entry in the table, also it can be used to adding and getting data from the tables. every model is associated witha resouce model, model forwards the request to the Resouce model ad actual database interaction happend in resourcemodel.
-	.) Resorcemode -> Resouce model is mainly respnsible for the database operations such as insertion, updation, deletion and selection of the data.
-	.) Collection -> it is worked as a group of model to work with multiple data from the table we can apply filter sorting over the collection. and get the multiple entites according to our need.
+Q) Explain the process followed for database interactions through PDO or any other preferred method for security and to avoid SQL injection vulnerabilities.
+-> Magento Uses ORM System to interact with the database. ORM system in Magento contains 3 major files they are Model, ResourceMode, and collection. all though there are also repositories that help encapsulate data while interacting with the database. ORM System provides a secure way to work with a database to prevent any SQL injection. using Model and ResourceModel we can interact with the magento database without writing direct SQL queries. magento denies using SQL query unless it is absolutely necessary, ORM uses query builders like addFiledToFilter, and addFiledToSelect to avoid writing raw queries we can avoid SQL injection.
+	.) Model -> Model is basically setters and getters, it represents a single data entry in the table, also it can be used to adding and getting data from the tables. every model is associated with a resourceModel, model forwards the request to the Resouce model ad the actual database interaction happens in resourcemodel.
+	.) Resorcemode -> Resouce model is mainly responsible for the database operations such as insertion, updation, deletion, and selection of the data.
+	.) Collection -> It is worked as a group of models to work with multiple data from the table we can apply filter sorting over the collection. and get multiple entities according to our needs.
